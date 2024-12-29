@@ -2,3 +2,4 @@ helloworld/.venv/
 blog/.venv/
 message-board/.venv/
 .DS_Store
+*.pyc
