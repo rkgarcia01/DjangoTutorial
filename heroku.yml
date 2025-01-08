@@ -1,0 +1,8 @@
+build:
+  languages:
+    python:
+      version: 3.11
+  config:
+    PATH: helloworld:$PATH
+  script:
+    - pip install -r helloworld/requirements.txt
