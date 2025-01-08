@@ -1,8 +1,10 @@
 build:
-  languages:
-    python:
-      version: 3.11
+  buildpacks:
+    - heroku/python
   config:
-    PATH: helloworld:$PATH
-  script:
+    PATH: helloworld
+    PYTHONPATH: helloworld
+  commands:
     - pip install -r helloworld/requirements.txt
+run:
+  web: gunicorn django_project.wsgi --chdir helloworld
