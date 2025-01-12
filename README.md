@@ -83,9 +83,9 @@ In this Django project, I utilized subdirectories for each Django application wi
 
 ## Heroku Buildpack for Subdirectories
 
-To deploy this project on Heroku, I used the [Heroku Subdirectory Buildpack](https://github.com/timanovsky/subdir-heroku-buildpack#how-to-use). This buildpack enables Heroku to handle projects where the root directory contains multiple subprojects, each with its own `requirements.txt` or `Procfile`.
+To deploy this project on Heroku, I used the a Subdirectory Buildpack. This buildpack enables Heroku to handle projects where the root directory contains multiple subprojects, each with its own `requirements.txt` or `Procfile`.
 
-### Benefits of Using This Buildpack
+### Benefits of Using A Buildpack
 
 - **Flexibility**: It supports deployments where the Heroku app is located in a specific subdirectory within the repository.
 - **Ease of Use**: The buildpack automatically identifies and processes the required subdirectory, simplifying the deployment process.
