@@ -70,4 +70,35 @@ Heroku is an excellent choice for developers who want to focus on building featu
 
 
 
+# **Subdirectory Deployment with Heroku**
+
+## Why Use Subdirectories?
+
+In this Django project, I utilized subdirectories for each Django application within the overall project. This structure provides a clear separation of concerns, making it easier to manage, develop, and deploy the project. Specifically, this setup:
+
+1. **Organizational Clarity**: Each Django app is isolated in its directory, ensuring the codebase remains modular and easy to navigate.
+2. **Independent Development**: Subdirectories allow for independent development and testing of different apps without interfering with the rest of the project.
+3. **Scalable Structure**: This approach aligns with Django's "app-centric" philosophy, making it easier to scale the project by adding new apps without complicating the file structure.
+4. **Heroku Compatibility**: This structure works seamlessly with Heroku by utilizing a custom buildpack that supports subdirectory-based projects, ensuring the deployment process is smooth and efficient.
+
+## Heroku Buildpack for Subdirectories
+
+To deploy this project on Heroku, I used the [Heroku Subdirectory Buildpack](https://github.com/timanovsky/subdir-heroku-buildpack#how-to-use). This buildpack enables Heroku to handle projects where the root directory contains multiple subprojects, each with its own `requirements.txt` or `Procfile`.
+
+### Benefits of Using This Buildpack
+
+- **Flexibility**: It supports deployments where the Heroku app is located in a specific subdirectory within the repository.
+- **Ease of Use**: The buildpack automatically identifies and processes the required subdirectory, simplifying the deployment process.
+- **Compatibility**: It ensures all dependencies and configurations within the subdirectory are correctly handled during the build process.
+
+For detailed instructions on how to configure the buildpack and deploy your project, please refer to the [official documentation](https://github.com/timanovsky/subdir-heroku-buildpack#how-to-use).
+
+---
+
+### Final Notes
+
+This setup was chosen to maintain modularity, improve code management, and ensure a seamless deployment process on Heroku. By combining Django's app-centric philosophy with the flexibility of Heroku's buildpacks, this project is structured for scalability and ease of maintenance.
+
+
+
 ## Happy coding! 🚀
