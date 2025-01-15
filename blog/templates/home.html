@@ -1,9 +1,9 @@
 <!-- templates/home.html-->
+<!--post_list comes from ListView() and contains all the objects for each blog post-->
 {% extends "base.html" %}
 
 {% block content %}
 {% for post in post_list %}
-<!--post_list comes from ListView() and contains all the objects for each blog post-->
 <div class="post-entry">
     <h2><a href="{% url 'post_detail' post.pk %}">{{ post.title }}</a></h2>
     <p>{{ post.body }}</p>
