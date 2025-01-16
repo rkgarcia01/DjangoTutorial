@@ -27,6 +27,10 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+# User redirection upon a successful login/logout
+LOGIN_REDIRECT_URL = "home"
+LOGOUT_REDIRECT_URL = "home"
+
 # when adding a new app always remember to put it in "INSTALLED_APPS"
 # Application definition
 
@@ -37,7 +41,8 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "blog.apps.BlogConfig",  # Blog is an app
+    "blog.apps.BlogConfig",  # blog is an app
+    "accounts.apps.AccountsConfig",  # accounts is an app
 ]
 
 MIDDLEWARE = [
