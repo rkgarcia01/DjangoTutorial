@@ -25,7 +25,7 @@ SECRET_KEY = "django-insecure-y)2c^sw(e^n6g=0@$r#8zqo%f*6+%rlhw#+8m4z87xj4a@i)7&
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [".herokuapp.com", "localhost", "127.0.0.1"]
 
 # User redirection upon a successful login/logout
 LOGIN_REDIRECT_URL = "home"
@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
+    "whitenoise.runserver_nostatic",
     "django.contrib.staticfiles",
     "blog.apps.BlogConfig",  # blog is an app
     "accounts.apps.AccountsConfig",  # accounts is an app
@@ -48,6 +49,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
@@ -122,9 +124,13 @@ USE_TZ = True
 # We need to add some CSS to our project to imporove the styling.
 # CSS, JavaScript, and Images are a core piece of any modern web application within Django world and are referred to as 'Static files'
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
-
+# STATIC_ROOT configuration, which is the absolute location of  these collected files, to a folder called staticfiles
+# STATICFILES_STORAGE is the file storage engine used by collectstatic
+# - change "STATICFILES_STORAGE = "django.contrib.staticfiles.storage.StaticFilesStorage"" to "STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"" because we are automating the process of running "python3 manage.py collectstatic"
 STATIC_URL = "/static/"
 STATICFILES_DIRS = [BASE_DIR / "static"]
+STATIC_ROOT = BASE_DIR / "staticfiles"
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
