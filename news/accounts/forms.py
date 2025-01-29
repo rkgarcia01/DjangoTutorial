@@ -28,7 +28,7 @@ class CustomUserCreationForm(UserCreationForm):
 
 
 # UserChangeForm, is used to updates existing user detials
-#  - Typically in Django admin interface or custo profile editing views.
+#  - Typically in Django admin interface or custom profile editing views.
 #  - 'CustomUser' model from 'models.py' might have additional fields like 'age'
 #    and this form ensures they're available when updating user data.
 class CustomUserChangeForm(UserChangeForm):

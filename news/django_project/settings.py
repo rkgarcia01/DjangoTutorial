@@ -11,7 +11,11 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
 from pathlib import Path
+from environs import Env
 
+# create a environs environment variable
+env = Env()
+env.read_env()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -20,12 +24,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-yq9ym6d^s9^iqggu-g)p0(p@-_(xb*g+fm2*cr6hdpconz4pcn"
+SECRET_KEY = env.str("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# DEBUG = False
+DEBUG = env.bool("DEBUG", default=False)
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [".herokuapp.com", "localhost", "127.0.0.1"]
 
 # Routing 'Login' and 'Logout' users to 'home'(homepage)
 LOGIN_REDIRECT_URL = "home"
@@ -40,7 +45,13 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    # 3rd Party
+    "crispy_forms",
+    "crispy_bootstrap5",
+    # Local
     "accounts.apps.AccountsConfig",
+    "pages.apps.PagesConfig",
+    "articles.apps.ArticlesConfig",
 ]
 
 MIDDLEWARE = [
@@ -74,7 +85,7 @@ TEMPLATES = [
 WSGI_APPLICATION = "django_project.wsgi.application"
 
 # Tells Django to use our cusom user model in place of hte built-in User model
-# 'accounts' is the app and '.CustomUser' is the class we created within models.py
+# 'accounts' is the app and '.CustomUser' is the class we created 'within accounts/models.py'
 AUTH_USER_MODEL = "accounts.CustomUser"
 
 # Database
@@ -109,10 +120,11 @@ AUTH_PASSWORD_VALIDATORS = [
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.0/topics/i18n/
+# TIME_ZONE = "UTC"
 
 LANGUAGE_CODE = "en-us"
 
-TIME_ZONE = "UTC"
+TIME_ZONE = "America/Chicago"
 
 USE_I18N = True
 
@@ -128,3 +140,19 @@ STATIC_URL = "static/"
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+
+# 3rd party files Packs
+CRIPSY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+CRISPY_TEMPLATE_PACK = "bootstrap5"
+
+# Django's console backend setting which outputs the email text to CLI
+# Pasting this in plain text into your codebase and Git is bad practice
+# EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+DEFAULT_FROM_EMAIL = env.str("DEFAULT_FROM_EMAIL")
+EMAIL_HOST = env.str("EMAIL_HOST")
+EMAIL_HOST_USER = env.str("EMAIL_HOST_USER")
+EMAIL_HOST_PASSWORD = env.str("EMAIL_HOST_PASSWORD")
+EMAIL_PORT = env.int("EMAIL_PORT", default=587)
+EMAIL_USE_TLS = env.bool("EMAIL_USE_TLS", default=True)

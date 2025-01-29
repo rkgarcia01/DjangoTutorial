@@ -2,7 +2,13 @@
 *.pyc
 __pycache__/
 
-helloworld/.venv/
-blog/.venv/
-message-board/.venv/
+
+# Virtual Environments
+*.venv/
 .DS_Store
+
+# Environment Varaibles
+*.env
+
+# banned.txt
+banned.txt
