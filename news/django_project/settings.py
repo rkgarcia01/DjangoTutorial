@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 
 from pathlib import Path
 from environs import Env
+import ssl
+import certifi
 
 # create a environs environment variable
 env = Env()
@@ -26,11 +28,14 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = env.str("SECRET_KEY")
 
+
 # SECURITY WARNING: don't run with debug turned on in production!
 # DEBUG = False
-DEBUG = env.bool("DEBUG", default=False)
+# DEBUG = env.bool("DEBUG", default=False)
+DEBUG = True
 
-ALLOWED_HOSTS = [".herokuapp.com", "localhost", "127.0.0.1"]
+# ALLOWED_HOSTS = [".herokuapp.com", "localhost", "127.0.0.1"]
+ALLOWED_HOSTS = []
 
 # Routing 'Login' and 'Logout' users to 'home'(homepage)
 LOGIN_REDIRECT_URL = "home"
@@ -153,6 +158,8 @@ CRISPY_TEMPLATE_PACK = "bootstrap5"
 # Django's console backend setting which outputs the email text to CLI
 # Pasting this in plain text into your codebase and Git is bad practice
 # EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+
+
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 DEFAULT_FROM_EMAIL = env.str("DEFAULT_FROM_EMAIL")
 EMAIL_HOST = env.str("EMAIL_HOST")
@@ -160,3 +167,8 @@ EMAIL_HOST_USER = env.str("EMAIL_HOST_USER")
 EMAIL_HOST_PASSWORD = env.str("EMAIL_HOST_PASSWORD")
 EMAIL_PORT = env.int("EMAIL_PORT", default=587)
 EMAIL_USE_TLS = env.bool("EMAIL_USE_TLS", default=True)
+
+# Create an SSL context with a trusted certificate authority (CA) bundle
+# This ensures secure communication when sending emails through the SMTP server
+# The certifi library provides an updated and reliable bundle of root certificates
+ssl_context = ssl.create_default_context(cafile=certifi.where())
