@@ -34,8 +34,8 @@ SECRET_KEY = env.str("SECRET_KEY")
 # DEBUG = env.bool("DEBUG", default=False)
 DEBUG = True
 
-# ALLOWED_HOSTS = [".herokuapp.com", "localhost", "127.0.0.1"]
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [".herokuapp.com", "localhost", "127.0.0.1"]
+# ALLOWED_HOSTS = []
 
 # Routing 'Login' and 'Logout' users to 'home'(homepage)
 LOGIN_REDIRECT_URL = "home"
