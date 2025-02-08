@@ -12,3 +12,7 @@ __pycache__/
 
 # banned.txt
 banned.txt
+
+#code (subdirectory)
+/code/
+
