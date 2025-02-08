@@ -30,13 +30,11 @@ SECRET_KEY = env.str("SECRET_KEY")
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-# DEBUG = False
-# DEBUG = True
 DEBUG = env.bool("DEBUG", default=False)
-DEBUG = True
 
+# What Hosting Servers are allowed
 ALLOWED_HOSTS = [".herokuapp.com", "localhost", "127.0.0.1"]
-# ALLOWED_HOSTS = []
+
 
 # Routing 'Login' and 'Logout' users to 'home'(homepage)
 LOGIN_REDIRECT_URL = "home"
@@ -104,7 +102,10 @@ AUTH_USER_MODEL = "accounts.CustomUser"
 #        "NAME": BASE_DIR / "db.sqlite3",
 #    }
 # }
-DATABASES = {"default": env.dj_db_url("DATABASE_URL")}
+# If "DATABASE_URL" is not found (e.g., when running locally withoug a ".env" file),
+# it will fall back to using SQLite
+# You would not need to manullay set it every time.
+DATABASES = {"default": env.dj_db_url("DATABASE_URL", default="sqlite:///db.sqlite3")}
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
