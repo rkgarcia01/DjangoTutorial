@@ -174,6 +174,3 @@ EMAIL_USE_TLS = env.bool("EMAIL_USE_TLS", default=True)
 # This ensures secure communication when sending emails through the SMTP server
 # The certifi library provides an updated and reliable bundle of root certificates
 ssl_context = ssl.create_default_context(cafile=certifi.where())
-
-
-# This is a test
